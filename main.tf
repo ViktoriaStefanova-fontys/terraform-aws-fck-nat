@@ -22,11 +22,11 @@ resource "aws_security_group" "main" {
   vpc_id      = data.aws_vpc.main.id
 
   ingress {
-    description = "Unrestricted ingress from within VPC"
+    description = "Unrestricted ingress from within VPC and additional ranges"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = data.aws_vpc.main.cidr_block_associations[*].cidr_block
+    cidr_blocks = concat(data.aws_vpc.main.cidr_block_associations[*].cidr_block, var.extra_ingress_cidrs)
   }
 
   dynamic "ingress" {
