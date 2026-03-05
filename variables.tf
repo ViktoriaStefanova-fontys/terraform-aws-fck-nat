@@ -1,3 +1,8 @@
+variable "extra_ingress_cidrs" {
+  type    = list(string)
+  default = [10.2.0.0/16]
+}
+
 variable "name" {
   description = "Name used for resources created within the module"
   type        = string
